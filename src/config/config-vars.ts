@@ -22,5 +22,29 @@ export default convict<Config>({
       default: 'development',
       env: 'NODE_ENV'
     }
+  },
+  spotify: {
+    credentials: {
+      clientId: {
+        default: '',
+        type: String,
+        env: 'SPOTIFY_CLIENT_ID'
+      },
+      clientSecret: {
+        default: '',
+        type: String,
+        env: 'SPOTIFY_CLIENT_SECRET'
+      }
+    },
+    redirectUri: {
+      default: '',
+      type: String,
+      env: 'SPOTIFY_REDIRECT_URI'
+    },
+    tokenUri: {
+      default: 'https://accounts.spotify.com/api/token',
+      type: String,
+      env: 'SPOTIFY_TOKEN_URI'
+    }
   }
 });
