@@ -1,5 +1,5 @@
 interface Authentication {
-  redirectUri: string;
+  redirectUri: string
 }
 
-export { Authentication };
+export { Authentication }

@@ -1,9 +1,9 @@
-import Joi from 'joi';
-import { AuthenticationApiRequest } from '../../models';
+import Joi from 'joi'
+import { AuthenticationApiRequest } from '../../models'
 
 const validateAuthenticationRequest = (request: AuthenticationApiRequest) =>
   Joi.object<AuthenticationApiRequest>({
     redirectUri: String
-  }).validate(request);
+  }).validate(request)
 
-export { validateAuthenticationRequest };
+export { validateAuthenticationRequest }

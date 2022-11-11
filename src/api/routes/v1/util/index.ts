@@ -1,1 +1,1 @@
-export * from './url-query-to-domain-query';
+export * from './url-query-to-domain-query'

@@ -1,8 +1,8 @@
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
+import Koa from 'koa'
+import bodyParser from 'koa-bodyparser'
 
 export const makeApp = (): Koa => {
-  const app = new Koa();
-  app.use(bodyParser());
-  return app;
-};
+  const app = new Koa()
+  app.use(bodyParser())
+  return app
+}

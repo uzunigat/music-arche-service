@@ -3,7 +3,6 @@
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
-    "prettier"
   ],
   "extends": [
     "eslint:recommended",
@@ -13,6 +12,6 @@
   ],
   "rules": {
     "no-console": 1,       // Means warning
-    "prettier/prettier": 2 // Means error
+    "semi":"off"
   }
 }

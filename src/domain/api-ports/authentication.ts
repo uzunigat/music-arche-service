@@ -1,5 +1,5 @@
-import { Authentication } from '../model';
+import { Authentication } from '../model'
 
-type AuthenticationQuery = Authentication;
+type AuthenticationQuery = Authentication
 
-export { AuthenticationQuery };
+export { AuthenticationQuery }

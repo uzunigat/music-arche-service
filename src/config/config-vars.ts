@@ -1,5 +1,5 @@
-import convict from 'convict';
-import { Config } from './interfaces';
+import convict from 'convict'
+import { Config } from './interfaces'
 
 export default convict<Config>({
   app: {
@@ -47,4 +47,4 @@ export default convict<Config>({
       env: 'SPOTIFY_TOKEN_URI'
     }
   }
-});
+})

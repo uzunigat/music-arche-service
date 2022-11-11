@@ -1,1 +1,1 @@
-export * from './spotify-credentials';
+export * from './spotify-credentials'

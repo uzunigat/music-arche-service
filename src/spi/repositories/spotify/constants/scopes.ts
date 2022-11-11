@@ -10,8 +10,8 @@ const scopesArr = [
   'playlist-modify-private',
   'user-read-recently-played',
   'user-top-read'
-];
+]
 
-const scopes = scopesArr.join(' ');
+const scopes = scopesArr.join(' ')
 
-export { scopes };
+export { scopes }

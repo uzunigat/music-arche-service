@@ -1,5 +1,5 @@
-import { AuthenticationQuery } from '../../../../domain/api-ports';
+import { AuthenticationQuery } from '../../../../domain/api-ports'
 
-type AuthenticationApiRequest = AuthenticationQuery;
+type AuthenticationApiRequest = AuthenticationQuery
 
-export { AuthenticationApiRequest };
+export { AuthenticationApiRequest }
