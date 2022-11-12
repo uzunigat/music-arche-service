@@ -3,6 +3,7 @@ import { loadConfig } from './config'
 import { AuthenticationService } from './domain/services'
 import { AuthenticationRepository } from './spi'
 import cors from '@koa/cors'
+import { TokenRepository } from './spi/repositories/postgres/token-repository'
 
 const runApplication = async () => {
   // Get config
@@ -13,9 +14,13 @@ const runApplication = async () => {
 
   // Create Repositories
   const authenticationRepository = new AuthenticationRepository()
+  const tokenRepository = new TokenRepository()
 
   // Create Services
-  const authenticationService = new AuthenticationService(authenticationRepository)
+  const authenticationService = new AuthenticationService({
+    authentication: authenticationRepository,
+    token: tokenRepository
+  })
 
   // Make Api Versiob Routes (v1, v2, ...)
   const routerApiV1 = makeApiRouterV1({ authenticationService })

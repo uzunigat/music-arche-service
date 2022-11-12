@@ -8,8 +8,7 @@ interface V1RouterDependencies {
 }
 
 type AuthenticationHandler = {
-  authenticate: KoaHandler
-  logged: KoaHandler
+  getToken: KoaHandler
 }
 
 type ApiHandlers = AuthenticationHandler

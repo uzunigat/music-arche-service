@@ -1,9 +1,8 @@
-import { AuthenticationQuery } from '../api-ports'
 import { Context } from 'koa'
+import { ResponseToken } from '../../spi/repositories/spotify/models/reponse-token'
 
 interface AuthenticationRepository {
-  authenticate(ctx: Context): Promise<any>
-  getToken(code: string, ctx: Context): any
+  getToken(code: string, ctx: Context): Promise<ResponseToken>
 }
 
 export { AuthenticationRepository }

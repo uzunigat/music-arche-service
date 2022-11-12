@@ -1,16 +1,18 @@
-import { AuthenticationQuery } from '../api-ports'
 import { AuthenticationRepository } from '../spi-ports/authentication-repository'
 import { Context } from 'koa'
+import { TokenRepository } from '../spi-ports/token-repository'
 
+interface AuthenticationServiceRepositories {
+  authentication: AuthenticationRepository
+  token: TokenRepository
+}
 class AuthenticationService {
-  constructor(private repository: AuthenticationRepository) {}
-
-  async authenticate(ctx: Context): Promise<any> {
-    return this.repository.authenticate(ctx)
-  }
+  constructor(private repositories: AuthenticationServiceRepositories) {}
 
   async getToken(code: string, ctx: Context) {
-    return this.repository.getToken(code, ctx)
+    const token = await this.repositories.authentication.getToken(code, ctx)
+    await this.repositories.token.saveToken(token)
+    ctx.redirect('exp://192.168.1.14:19000?test=test')
   }
 }
 
