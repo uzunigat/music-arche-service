@@ -1,5 +1,8 @@
 # MUSIC APP SERVER
 
+![gif](https://media.giphy.com/media/tqfS3mgQU28ko/giphy.gif
+)
+
 ## Before Run
 
 1. Create `.env` file on the root folder and copy-paste the content from `.env.sample` (contact @uzunigat to get all the env values!)
