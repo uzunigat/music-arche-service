@@ -1,0 +1,17 @@
+name: Discord
+on: [pull_request]
+
+jobs:
+  discord-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+
+
+
+
