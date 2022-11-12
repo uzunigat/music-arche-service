@@ -1,8 +1,8 @@
-import { ApiHandlers } from '../types';
-import { makeAuthenticationV1Handlers } from './authentication';
+import { ApiHandlers, V1RouterDependencies } from '../types'
+import { makeAuthenticationV1Handlers } from './authentication'
 
-const makeHandlers = (): ApiHandlers => ({
-  ...makeAuthenticationV1Handlers()
-});
+const makeHandlers = (dependencies: V1RouterDependencies): ApiHandlers => ({
+  ...makeAuthenticationV1Handlers(dependencies)
+})
 
-export { makeHandlers };
+export { makeHandlers }

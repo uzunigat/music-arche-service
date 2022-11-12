@@ -1,2 +1,2 @@
-export * from './routes';
-export * from './makeApp';
+export * from './routes'
+export * from './makeApp'

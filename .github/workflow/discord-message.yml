@@ -1,0 +1,14 @@
+name: discord message
+on: [pull_request]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Send Discord Message
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: 1040964953923915787
+          webhook_token: fdXEGAeXnKZ8vyt3SAOuvU02G7A0KeVm9xBSVFxNodkX_QmqlPY2jsYCNKFVxQLNqAX5
+          args: Testing
