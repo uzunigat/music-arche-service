@@ -8,6 +8,7 @@ jobs:
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: https://discord.com/api/webhooks/1040964953923915787/fdXEGAeXnKZ8vyt3SAOuvU02G7A0KeVm9xBSVFxNodkX_QmqlPY2jsYCNKFVxQLNqAX5
-          content: 'Test'
+          content: ${{ steps.pr-url.outputs.url }}
+
 
 
