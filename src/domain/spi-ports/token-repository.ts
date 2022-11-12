@@ -1,9 +1,7 @@
-import { Context } from 'koa'
-import { ResponseToken } from '../../spi/repositories/spotify/models/reponse-token'
-import { Token } from '../model'
+import { PersistedToken, Token } from '../model'
 
 interface TokenRepository {
-  saveToken(token: Token): void
+  saveToken(token: Token): Promise<PersistedToken>
 }
 
 export { TokenRepository }

@@ -1,0 +1,22 @@
+version: '3.7'
+
+services: 
+  db:
+    image: postgres:11-alpine@sha256:e149c53d27b41114d5cf2f7ef5e473da98772a85a9482febb4e8e85538b834ba
+    environment:
+      POSTGRES_DB: ${RDS_DBNAME}
+      POSTGRES_USER: ${RDS_USERNAME}
+      POSTGRES_PASSWORD: ${RDS_PASSWORD}
+      PGPORT: ${RDS_PORT}
+    ports:
+      - ${RDS_PORT}:${RDS_PORT}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      interval: 1s
+      retries: 15
+      test: pg_isready -d ${RDS_DBNAME} -U ${RDS_USERNAME} -p ${RDS_PORT}
+
+volumes:
+  db-data:
+    driver: local

@@ -4,17 +4,23 @@ import { AuthenticationService } from './domain/services'
 import { AuthenticationRepository } from './spi'
 import cors from '@koa/cors'
 import { TokenRepository } from './spi/repositories/postgres/token-repository'
+import { KnexDatabaseConnection } from './spi/repositories/postgres'
 
 const runApplication = async () => {
   // Get config
   const config = await loadConfig()
+
+  // Start Database
+  const db = new KnexDatabaseConnection()
+  await db.connect(config.get('db'))
+  await db.runMigrations()
 
   // Create Koa app instance
   const app = await makeApp()
 
   // Create Repositories
   const authenticationRepository = new AuthenticationRepository()
-  const tokenRepository = new TokenRepository()
+  const tokenRepository = new TokenRepository(db)
 
   // Create Services
   const authenticationService = new AuthenticationService({

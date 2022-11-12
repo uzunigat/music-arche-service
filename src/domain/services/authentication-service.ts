@@ -11,8 +11,8 @@ class AuthenticationService {
 
   async getToken(code: string, ctx: Context) {
     const token = await this.repositories.authentication.getToken(code, ctx)
-    await this.repositories.token.saveToken(token)
-    ctx.redirect('exp://192.168.1.14:19000?test=test')
+    const persistedToken = await this.repositories.token.saveToken(token)
+    ctx.redirect(`exp://192.168.1.14:19000?accessTokenId=${persistedToken.id}`)
   }
 }
 

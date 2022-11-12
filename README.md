@@ -14,3 +14,15 @@ npm install
 ``` console
 npm run dev
 ```
+
+## Migrations
+
+Create New Migration File
+```console
+knex migrate:make migration-filename
+```
+
+Rollback migration
+```console
+knex migrate:rollback
+```

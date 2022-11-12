@@ -23,6 +23,33 @@ export default convict<Config>({
       env: 'NODE_ENV'
     }
   },
+  db: {
+    host: {
+      format: String,
+      env: 'RDS_HOST',
+      default: 'localhost'
+    },
+    database: {
+      format: String,
+      env: 'RDS_DBNAME',
+      default: 'pedify'
+    },
+    port: {
+      format: Number,
+      env: 'RDS_PORT',
+      default: 5432
+    },
+    user: {
+      format: String,
+      env: 'RDS_USERNAME',
+      default: 'username'
+    },
+    password: {
+      format: String,
+      env: 'RDS_PASSWORD',
+      default: 'password'
+    }
+  },
   spotify: {
     credentials: {
       clientId: {
