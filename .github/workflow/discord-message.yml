@@ -1,5 +1,5 @@
 name: discord message
-on: [push]
+on: [pull_request]
 jobs:
   build:
     name: Build
@@ -11,4 +11,4 @@ jobs:
         with:
           webhook_id: 1040964953923915787
           webhook_token: fdXEGAeXnKZ8vyt3SAOuvU02G7A0KeVm9xBSVFxNodkX_QmqlPY2jsYCNKFVxQLNqAX5
-          args: The ${{ github.event_name }} event triggered first step.
+          args: Testing
