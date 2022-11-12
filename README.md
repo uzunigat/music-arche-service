@@ -1,5 +1,7 @@
 # MUSIC APP SERVER
 
+This is the server app side from Pedify application.
+
 ![gif](https://media.giphy.com/media/tqfS3mgQU28ko/giphy.gif
 )
 
