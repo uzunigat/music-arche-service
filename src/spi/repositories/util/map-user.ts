@@ -4,6 +4,7 @@ import { User } from '../../../domain/model'
 
 const mapToUserDomain = (user: dbModels.User): User => ({
   id: user.id,
+  displayName: user.display_name,
   tokenId: user.token_id,
   href: user.href,
   spotifyId: user.spotify_id,
@@ -13,6 +14,7 @@ const mapToUserDomain = (user: dbModels.User): User => ({
 
 const mapToUserDB = (user: EphemeralUser): dbModels.EphemeralUser => ({
   href: user.href,
+  display_name: user.displayName,
   spotify_id: user.spotifyId,
   token_id: user.tokenId
 })

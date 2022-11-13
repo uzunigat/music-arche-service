@@ -38,7 +38,8 @@ export async function up(knex: Knex): Promise<void> {
 
   await knex.schema.createTable(userTable, (table) => {
     table.uuid('id').notNullable().primary().defaultTo(knex.raw('uuid_generate_v4()'))
-    table.string('token_id').notNullable()
+    table.string('display_name').notNullable()
+    table.string('token_id').notNullable().unique()
     table.string('spotify_id').notNullable()
     table.string('href').notNullable()
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now())

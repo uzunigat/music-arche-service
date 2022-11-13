@@ -1,5 +1,6 @@
 interface User {
   id: string
+  display_name: string
   token_id: string
   spotify_id: string
   href: string

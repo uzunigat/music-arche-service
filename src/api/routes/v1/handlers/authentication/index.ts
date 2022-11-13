@@ -16,9 +16,10 @@ const makeAuthenticationV1Handlers = (dependencies: HandlerDependencies): Authen
       const token = await dependencies.authenticationService.getToken(code as string)
       const persistedToken = await dependencies.tokenService.saveToken(token)
       const user = await dependencies.spotifyService.getUser(token)
-      const response = fetch('http://localhost:3000/api/v1/user', {
+      await fetch('http://localhost:3000/api/v1/user', {
         method: 'POST',
         body: JSON.stringify({
+          displayName: user.displayName,
           href: user.href,
           spotifyId: user.id,
           tokenId: persistedToken.id
