@@ -1,7 +1,7 @@
 import { makeApiRouterV1, makeApp } from './api'
 import { loadConfig } from './config'
-import { AuthenticationService } from './domain/services'
-import { AuthenticationRepository } from './spi'
+import { AuthenticationService, SpotifyService, TokenService } from './domain/services'
+import { AuthenticationRepository, SpotifyRepository } from './spi'
 import cors from '@koa/cors'
 import { TokenRepository } from './spi/repositories/postgres/token-repository'
 import { KnexDatabaseConnection } from './spi/repositories/postgres'
@@ -21,15 +21,27 @@ const runApplication = async () => {
   // Create Repositories
   const authenticationRepository = new AuthenticationRepository()
   const tokenRepository = new TokenRepository(db)
+  const spotifyRepository = new SpotifyRepository()
 
   // Create Services
   const authenticationService = new AuthenticationService({
-    authentication: authenticationRepository,
+    authentication: authenticationRepository
+  })
+
+  const spotifyService = new SpotifyService({
+    spotify: spotifyRepository
+  })
+
+  const tokenService = new TokenService({
     token: tokenRepository
   })
 
   // Make Api Versiob Routes (v1, v2, ...)
-  const routerApiV1 = makeApiRouterV1({ authenticationService })
+  const routerApiV1 = makeApiRouterV1({
+    authenticationService: authenticationService,
+    spotifyService: spotifyService,
+    tokenService: tokenService
+  })
 
   // Middlewares
   app.use(cors())

@@ -1,12 +1,11 @@
 import configVars from '../../../config'
 import { AuthenticationRepository as SPIAuthenticationRepository } from '../../../domain/spi-ports/authentication-repository'
 import fetch from 'node-fetch'
-import { Context } from 'koa'
 import camelcaseKeys from 'camelcase-keys'
 import { ResponseToken } from './models/reponse-token'
 
 class AuthenticationRepository implements SPIAuthenticationRepository {
-  async getToken(code: string, ctx: Context): Promise<ResponseToken> {
+  async getToken(code: string): Promise<ResponseToken> {
     try {
       const credentials = configVars.get('spotify').credentials
       const credsB64 = btoa(`${credentials.clientId}:${credentials.clientSecret}`)
