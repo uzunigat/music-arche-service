@@ -10,6 +10,10 @@ class UserService {
   async create(request: CreateUserApiRequest) {
     return await this.repositories.user.create(request)
   }
+
+  async getUserByTokenId(token: string) {
+    return await this.repositories.user.getUserByTokenId(token)
+  }
 }
 
 export { UserService }

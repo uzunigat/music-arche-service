@@ -16,6 +16,12 @@ const makeUserV1Handlers = (dependencies: HandlerDependencies): UserHandler => (
 
     const result = await dependencies.userService.create(validRequest)
     ctx.body = { data: result }
+  },
+  getByTokenId: async (ctx: Context) => {
+    const { tokenId } = ctx.params
+    const user = await dependencies.userService.getUserByTokenId(tokenId)
+
+    ctx.body = { data: user }
   }
 })
 
