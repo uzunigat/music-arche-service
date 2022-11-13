@@ -69,7 +69,7 @@ export default convict<Config>({
       env: 'SPOTIFY_REDIRECT_URI'
     },
     tokenUri: {
-      default: 'https://accounts.spotify.com/api/token',
+      default: 'https://accounts.spotify.com/api/auth',
       type: String,
       env: 'SPOTIFY_TOKEN_URI'
     }

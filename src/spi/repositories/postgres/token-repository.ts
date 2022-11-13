@@ -6,7 +6,7 @@ import { EphemeralToken } from '../../../domain/spi-ports/token-dtos'
 import { mapToTokenDB } from '../util'
 
 class TokenRepository implements SPITokenRepository {
-  private tokentable = 'token'
+  private tokentable = 'tokens'
 
   constructor(private db: KnexDatabaseConnection) {}
 

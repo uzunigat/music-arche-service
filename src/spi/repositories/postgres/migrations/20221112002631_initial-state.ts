@@ -1,8 +1,9 @@
 import { Knex } from 'knex'
 
-const tokenTable = 'token'
+const tokenTable = 'tokens'
+const userTable = 'users'
 
-const tables = [tokenTable]
+const tables = [tokenTable, userTable]
 
 const ON_UPDATE_TIMESTAMP_FUNCTION = `
   CREATE OR REPLACE FUNCTION on_update_timestamp()
@@ -31,6 +32,17 @@ export async function up(knex: Knex): Promise<void> {
     table.string('expires_in', 512).notNullable()
     table.string('scope', 512).notNullable()
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now())
+  })
+
+  // User Table
+
+  await knex.schema.createTable(userTable, (table) => {
+    table.uuid('id').notNullable().primary().defaultTo(knex.raw('uuid_generate_v4()'))
+    table.string('token_id').notNullable()
+    table.string('spotify_id').notNullable()
+    table.string('href').notNullable()
+    table.timestamp('created_at').notNullable().defaultTo(knex.fn.now())
+    table.timestamp('updated_at').notNullable().defaultTo(knex.fn.now())
   })
 }
 

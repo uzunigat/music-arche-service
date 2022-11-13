@@ -1,4 +1,3 @@
-import { Context } from 'koa'
 import { Token } from '../model'
 import { SpotifyRepository } from '../spi-ports'
 
