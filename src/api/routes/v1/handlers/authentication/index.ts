@@ -1,6 +1,8 @@
 import { AuthenticationHandler } from '../../types'
 import { Context } from 'koa'
 import { AuthenticationService, SpotifyService, TokenService } from '../../../../../domain/services'
+import fetch from 'node-fetch'
+import { mapToTokenDomain } from '../../../../../spi/repositories/util'
 interface HandlerDependencies {
   authenticationService: AuthenticationService
   spotifyService: SpotifyService
@@ -8,16 +10,27 @@ interface HandlerDependencies {
 }
 
 const makeAuthenticationV1Handlers = (dependencies: HandlerDependencies): AuthenticationHandler => ({
-  getToken: async (ctx: Context) => {
+  login: async (ctx: Context) => {
     const { code } = ctx.query
+    try {
+      const token = await dependencies.authenticationService.getToken(code as string)
+      const persistedToken = await dependencies.tokenService.saveToken(token)
+      const user = await dependencies.spotifyService.getUser(token)
+      const response = fetch('http://localhost:3000/api/v1/user', {
+        method: 'POST',
+        body: JSON.stringify({
+          href: user.href,
+          spotifyId: user.id,
+          tokenId: persistedToken.id
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      })
 
-    const token = await dependencies.authenticationService.getToken(code as string)
-
-    const persistedToken = await dependencies.tokenService.saveToken(token)
-
-    const user = await dependencies.spotifyService.getUser(token)
-
-    ctx.redirect(`exp://192.168.1.14:19000?accessTokenId=${persistedToken.id}`)
+      ctx.redirect(`exp://192.168.1.14:19000?accessTokenId=${persistedToken.id}`)
+    } catch (e) {
+      console.error(e)
+      throw e
+    }
   }
 })
 
