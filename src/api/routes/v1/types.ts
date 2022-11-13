@@ -1,10 +1,12 @@
 import { Context, Next } from 'koa'
-import { AuthenticationService } from '../../../domain/services'
+import { AuthenticationService, SpotifyService, TokenService } from '../../../domain/services'
 
 type KoaHandler = (ctx: Context, next?: Next) => Promise<void>
 
 interface V1RouterDependencies {
   authenticationService: AuthenticationService
+  spotifyService: SpotifyService
+  tokenService: TokenService
 }
 
 type AuthenticationHandler = {
