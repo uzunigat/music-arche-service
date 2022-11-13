@@ -17,6 +17,7 @@ type AuthenticationHandler = {
 
 type UserHandler = {
   create: KoaHandler
+  getByTokenId: KoaHandler
 }
 
 type ApiHandlers = AuthenticationHandler & UserHandler
