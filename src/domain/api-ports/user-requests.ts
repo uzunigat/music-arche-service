@@ -1,7 +1,7 @@
+import { UserSpotify } from '../model'
+
 interface UserRequest {
-  spotifyId: string
-  displayName: string
-  href: string
+  user: UserSpotify
   tokenId: string
 }
 

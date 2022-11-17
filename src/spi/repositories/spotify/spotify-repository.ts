@@ -1,13 +1,11 @@
 import { SpotifyRepository as SPISpotifyRepository } from '../../../domain/spi-ports/spotify-repository'
 import fetch from 'node-fetch'
-import { Token, User } from '../../../domain/model'
+import { Token, UserSpotify } from '../../../domain/model'
 import camelcaseKeys from 'camelcase-keys'
-
-const URI_CURRENT_USER_PROFILE = 'https://api.spotify.com/v1/me'
-
+import config from '../../../config/config-vars'
 class SpotifyRepository implements SPISpotifyRepository {
-  async getUser(token: Token): Promise<User> {
-    const response = await fetch(URI_CURRENT_USER_PROFILE, {
+  async getUser(token: Token): Promise<UserSpotify> {
+    const response = await fetch(config.get('spotify').spotifyApi.currentUserProfile, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token.accessToken}`,
@@ -16,8 +14,8 @@ class SpotifyRepository implements SPISpotifyRepository {
       }
     })
 
-    const responseUser = camelcaseKeys(await response.json()) as User
-    return responseUser
+    const spotifyUser = camelcaseKeys(await response.json()) as UserSpotify
+    return spotifyUser
   }
 }
 

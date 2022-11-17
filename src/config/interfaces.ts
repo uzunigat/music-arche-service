@@ -1,3 +1,4 @@
+import { string } from 'joi'
 import { SpotifyCredentials } from '../spi/repositories/spotify/models'
 
 export interface AppConfig {
@@ -15,10 +16,15 @@ export interface DatabaseConfig {
   password: string
 }
 
+export interface SpotifyApiConfig {
+  currentUserProfile: string
+}
+
 export interface SpotifyConfig {
   credentials: SpotifyCredentials
   redirectUri: string
   tokenUri: string
+  spotifyApi: SpotifyApiConfig
 }
 
 export interface Config {

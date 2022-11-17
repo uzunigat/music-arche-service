@@ -72,6 +72,13 @@ export default convict<Config>({
       default: 'https://accounts.spotify.com/api/auth',
       type: String,
       env: 'SPOTIFY_TOKEN_URI'
+    },
+    spotifyApi: {
+      currentUserProfile: {
+        default: 'https://api.spotify.com/v1/me',
+        type: String,
+        env: 'SPOTIFY_CURRENT_USER_PROFILE'
+      }
     }
   }
 })

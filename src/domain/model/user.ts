@@ -1,11 +1,17 @@
 interface User {
-  id: string
+  id?: string
   displayName: string
-  spotifyId: string
   tokenId: string
+  spotifyId: string
+  externalUrlSpotify: string
+  followersHref: unknown | null
+  followersTotal: number
   href: string
-  createdAt: Date
-  updatedAt: Date
+  type: string
+  uri: string
+  imagesUrl: string
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 type PersistedUser = User

@@ -20,6 +20,7 @@ class UserRepository implements SPIUserRepository {
     const trx = outsideTrx || (await this.createTransaction())
 
     const ephemeralUserDB = mapToUserDB(ephemeralUser)
+    console.log('Ephemeral User:', ephemeralUserDB)
     const [createdUser] = await trx.table(this.userTable).insert(ephemeralUserDB).returning<User[]>('*')
 
     if (!outsideTrx) await trx.commit()

@@ -1,5 +1,5 @@
 import { User } from '../../../../domain/model'
 
-type ResponseUser = User
+type SpotifyUser = Omit<User, 'id' | 'createdAt' | 'updatedAt'>
 
-export { ResponseUser }
+export { SpotifyUser }

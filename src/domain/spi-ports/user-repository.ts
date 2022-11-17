@@ -1,4 +1,4 @@
-import { PersistedUser, User } from '../model'
+import { PersistedUser } from '../model'
 import { Knex } from 'knex'
 import { EphemeralUser } from './user-dtos'
 

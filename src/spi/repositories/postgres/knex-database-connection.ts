@@ -18,7 +18,6 @@ export class KnexDatabaseConnection {
         pool: { min: 0, max: 100 },
         migrations: { directory: `${__dirname}/migrations`, tableName: 'knex_migrations' }
       })
-      console.log('Successfully connected to database.')
     } catch (err: any) {
       console.error(err)
     }

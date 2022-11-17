@@ -2,7 +2,6 @@ import { AuthenticationHandler } from '../../types'
 import { Context } from 'koa'
 import { AuthenticationService, SpotifyService, TokenService } from '../../../../../domain/services'
 import fetch from 'node-fetch'
-import { mapToTokenDomain } from '../../../../../spi/repositories/util'
 interface HandlerDependencies {
   authenticationService: AuthenticationService
   spotifyService: SpotifyService
@@ -19,15 +18,13 @@ const makeAuthenticationV1Handlers = (dependencies: HandlerDependencies): Authen
       await fetch('http://localhost:3000/api/v1/user', {
         method: 'POST',
         body: JSON.stringify({
-          displayName: user.displayName,
-          href: user.href,
-          spotifyId: user.id,
+          user,
           tokenId: persistedToken.id
         }),
         headers: { 'Content-Type': 'application/json' }
       })
 
-      ctx.redirect(`exp://192.168.1.14:19000?accessTokenId=${persistedToken.id}`)
+      ctx.redirect(`exp://192.168.1.14:19000?accessTokenId=${persistedToken.id}&userId=${user.id}`)
     } catch (e) {
       console.error(e)
       throw e

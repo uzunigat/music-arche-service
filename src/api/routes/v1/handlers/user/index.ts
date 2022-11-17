@@ -11,6 +11,7 @@ interface HandlerDependencies {
 const makeUserV1Handlers = (dependencies: HandlerDependencies): UserHandler => ({
   create: async (ctx: Context) => {
     const createRequestBody = ctx.request.body as CreateUserApiRequest
+
     const { error: validationError, value: validRequest } = createUserRequestValidator(createRequestBody)
     if (validationError) throw new BadRequest(validationError.details[0]?.message)
 
