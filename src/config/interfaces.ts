@@ -1,4 +1,3 @@
-import { string } from 'joi'
 import { SpotifyCredentials } from '../spi/repositories/spotify/models'
 
 export interface AppConfig {
@@ -18,6 +17,8 @@ export interface DatabaseConfig {
 
 export interface SpotifyApiConfig {
   currentUserProfile: string
+  play: string
+  pause: string
 }
 
 export interface SpotifyConfig {

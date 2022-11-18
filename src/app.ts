@@ -31,7 +31,8 @@ const runApplication = async () => {
   })
 
   const spotifyService = new SpotifyService({
-    spotify: spotifyRepository
+    spotify: spotifyRepository,
+    token: tokenRepository
   })
 
   const tokenService = new TokenService({

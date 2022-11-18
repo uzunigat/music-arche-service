@@ -1,9 +1,11 @@
 import { PersistedToken, Token } from '../../../domain/model'
+import * as dbModels from './models'
+
 import { Knex } from 'knex'
 import { TokenRepository as SPITokenRepository } from '../../../domain/spi-ports/token-repository'
 import { KnexDatabaseConnection } from './knex-database-connection'
 import { EphemeralToken } from '../../../domain/spi-ports/token-dtos'
-import { mapToTokenDB } from '../util'
+import { mapToTokenDB, mapToTokenDomain } from '../util'
 
 class TokenRepository implements SPITokenRepository {
   private tokentable = 'tokens'
@@ -23,6 +25,12 @@ class TokenRepository implements SPITokenRepository {
     if (!outsideTrx) await trx.commit()
 
     return createdToken
+  }
+
+  async getToken(tokenId: string): Promise<Token> {
+    const [token] = await this.db.client.table(this.tokentable).where({ id: tokenId }).returning<dbModels.Token[]>('*')
+    const mapedToken = mapToTokenDomain(token)
+    return mapedToken
   }
 }
 

@@ -7,6 +7,7 @@ import { version } from './version'
 const baseApiRoute = `/api/${version}`
 const baseAuthenticationRoute = `${baseApiRoute}/auth`
 const baseUserRoute = `${baseApiRoute}/user`
+const basePlayerRoute = `${baseApiRoute}/player`
 
 const makeApiRouterV1 = (dependencies: V1RouterDependencies): Router => {
   const router = new Router()
@@ -18,6 +19,10 @@ const makeApiRouterV1 = (dependencies: V1RouterDependencies): Router => {
   // User Route
   router.post(`${baseUserRoute}`, handlers.create)
   router.get(`${baseUserRoute}/:${RouteParameters.TOKEN_ID}`, handlers.getByTokenId)
+
+  // Player Route
+  router.put(`${basePlayerRoute}/:${RouteParameters.TOKEN_ID}/play`, handlers.play)
+  router.put(`${basePlayerRoute}/:${RouteParameters.TOKEN_ID}/pause`, handlers.pause)
 
   return router
 }

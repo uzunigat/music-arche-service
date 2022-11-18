@@ -78,6 +78,16 @@ export default convict<Config>({
         default: 'https://api.spotify.com/v1/me',
         type: String,
         env: 'SPOTIFY_CURRENT_USER_PROFILE'
+      },
+      play: {
+        default: 'https://api.spotify.com/v1/me/player/pause',
+        type: String,
+        env: 'SPOTIFY_PLAYER_PLAY'
+      },
+      pause: {
+        default: 'https://api.spotify.com/v1/me/player/pause',
+        type: String,
+        env: 'SPOTIFY_PLAYER_PAUSE'
       }
     }
   }

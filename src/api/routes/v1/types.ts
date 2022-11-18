@@ -20,6 +20,11 @@ type UserHandler = {
   getByTokenId: KoaHandler
 }
 
-type ApiHandlers = AuthenticationHandler & UserHandler
+type PlayerHandler = {
+  play: KoaHandler
+  pause: KoaHandler
+}
 
-export { ApiHandlers, V1RouterDependencies, AuthenticationHandler, UserHandler }
+type ApiHandlers = AuthenticationHandler & UserHandler & PlayerHandler
+
+export { ApiHandlers, V1RouterDependencies, AuthenticationHandler, UserHandler, PlayerHandler }
