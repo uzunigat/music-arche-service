@@ -19,6 +19,7 @@ export interface SpotifyApiConfig {
   currentUserProfile: string
   play: string
   pause: string
+  search: string
 }
 
 export interface SpotifyConfig {

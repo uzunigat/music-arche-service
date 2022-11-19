@@ -1,4 +1,3 @@
-import { mapToTokenDomain } from '../../spi/repositories/util'
 import { Token } from '../model'
 import { SpotifyRepository } from '../spi-ports'
 import { TokenRepository } from '../spi-ports/token-repository'
@@ -22,6 +21,11 @@ class SpotifyService {
   async pause(tokenId: string) {
     const token = await this.repositories.token.getToken(tokenId)
     await this.repositories.spotify.pause(token)
+  }
+
+  async searchTracks(tokenId: string, searchQuery: string) {
+    const token = await this.repositories.token.getToken(tokenId)
+    return await this.repositories.spotify.searchTracks(token, searchQuery)
   }
 }
 

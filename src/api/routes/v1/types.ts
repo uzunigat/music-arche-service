@@ -25,6 +25,10 @@ type PlayerHandler = {
   pause: KoaHandler
 }
 
-type ApiHandlers = AuthenticationHandler & UserHandler & PlayerHandler
+type TrackerHandler = {
+  searchTracks: KoaHandler
+}
 
-export { ApiHandlers, V1RouterDependencies, AuthenticationHandler, UserHandler, PlayerHandler }
+type ApiHandlers = AuthenticationHandler & UserHandler & PlayerHandler & TrackerHandler
+
+export { ApiHandlers, V1RouterDependencies, AuthenticationHandler, UserHandler, PlayerHandler, TrackerHandler }

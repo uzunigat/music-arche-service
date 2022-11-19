@@ -8,6 +8,7 @@ const baseApiRoute = `/api/${version}`
 const baseAuthenticationRoute = `${baseApiRoute}/auth`
 const baseUserRoute = `${baseApiRoute}/user`
 const basePlayerRoute = `${baseApiRoute}/player`
+const baseTrackRoute = `${baseApiRoute}/search`
 
 const makeApiRouterV1 = (dependencies: V1RouterDependencies): Router => {
   const router = new Router()
@@ -23,6 +24,9 @@ const makeApiRouterV1 = (dependencies: V1RouterDependencies): Router => {
   // Player Route
   router.put(`${basePlayerRoute}/:${RouteParameters.TOKEN_ID}/play`, handlers.play)
   router.put(`${basePlayerRoute}/:${RouteParameters.TOKEN_ID}/pause`, handlers.pause)
+
+  // Track Route
+  router.get(`${baseTrackRoute}/:${RouteParameters.SEARCH_QUERY}/:${RouteParameters.TOKEN_ID}`, handlers.searchTracks)
 
   return router
 }
