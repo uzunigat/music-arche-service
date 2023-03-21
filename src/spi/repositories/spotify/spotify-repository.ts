@@ -42,6 +42,21 @@ class SpotifyRepository implements SPISpotifyRepository {
     })
   }
 
+  async getQueue(token: Token): Promise<any> {
+    const response = await fetch(config.get('spotify').spotifyApi.queue, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token.accessToken}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    })
+
+    const obj = (await response.json()) as any
+
+    return obj
+  }
+
   async searchTracks(token: Token, searchQuery: string): Promise<any> {
     const response = await fetch(
       `${config.get('spotify').spotifyApi.search}?` +

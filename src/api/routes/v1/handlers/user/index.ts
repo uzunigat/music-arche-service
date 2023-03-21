@@ -15,12 +15,28 @@ const makeUserV1Handlers = (dependencies: HandlerDependencies): UserHandler => (
     const { error: validationError, value: validRequest } = createUserRequestValidator(createRequestBody)
     if (validationError) throw new BadRequest(validationError.details[0]?.message)
 
+    const user = await dependencies.userService.getBySpotifyId(validRequest.user.id)
+
+    if (user) {
+      ctx.status = 200
+      ctx.body = { data: user }
+      return
+    }
+
     const result = await dependencies.userService.create(validRequest)
     ctx.body = { data: result }
   },
-  getByTokenId: async (ctx: Context) => {
-    const { tokenId } = ctx.params
-    const user = await dependencies.userService.getUserByTokenId(tokenId)
+
+  getById: async (ctx: Context) => {
+    const { userId } = ctx.params
+    const user = await dependencies.userService.getById(userId)
+
+    ctx.body = { data: user }
+  },
+
+  getBySpotifyId: async (ctx: Context) => {
+    const { spotifyId } = ctx.params
+    const user = await dependencies.userService.getBySpotifyId(spotifyId)
 
     ctx.body = { data: user }
   }

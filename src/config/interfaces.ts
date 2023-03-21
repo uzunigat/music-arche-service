@@ -20,6 +20,7 @@ export interface SpotifyApiConfig {
   play: string
   pause: string
   search: string
+  queue: string
 }
 
 export interface SpotifyConfig {

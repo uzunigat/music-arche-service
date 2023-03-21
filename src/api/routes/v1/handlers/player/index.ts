@@ -13,6 +13,11 @@ const makePlayerV1Handlers = (dependencies: HandlerDependencies): PlayerHandler 
   pause: async (ctx: Context) => {
     const { tokenId } = ctx.params
     await dependencies.spotifyService.pause(tokenId)
+  },
+  getQueue: async (ctx: Context) => {
+    const { tokenId } = ctx.params
+    const queue = await dependencies.spotifyService.getQueue(tokenId)
+    ctx.body = queue
   }
 })
 

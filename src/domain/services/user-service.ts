@@ -11,15 +11,21 @@ class UserService {
   async create(request: CreateUserApiRequest) {
     const { user: spotifyUser, tokenId } = request
 
-    console.log('Spotfiy user', spotifyUser)
     const user = mapUserFromSpotifyToDomain(spotifyUser, tokenId)
 
-    console.log('User', user)
     return await this.repositories.user.create(user)
   }
 
-  async getUserByTokenId(token: string) {
-    return await this.repositories.user.getUserByTokenId(token)
+  async getBySpotifyId(spotifyId: string) {
+    return await this.repositories.user.getBySpotifyId(spotifyId)
+  }
+
+  async getById(id: string) {
+    return await this.repositories.user.getById(id)
+  }
+
+  async getByTokenId(tokenId: string) {
+    return await this.repositories.user.getByTokenId(tokenId)
   }
 }
 

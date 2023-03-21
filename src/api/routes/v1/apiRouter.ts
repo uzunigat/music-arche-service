@@ -19,11 +19,12 @@ const makeApiRouterV1 = (dependencies: V1RouterDependencies): Router => {
 
   // User Route
   router.post(`${baseUserRoute}`, handlers.create)
-  router.get(`${baseUserRoute}/:${RouteParameters.TOKEN_ID}`, handlers.getByTokenId)
+  router.get(`${baseUserRoute}/:${RouteParameters.SPOTIFY_ID}`, handlers.getBySpotifyId)
 
   // Player Route
   router.put(`${basePlayerRoute}/:${RouteParameters.TOKEN_ID}/play`, handlers.play)
   router.put(`${basePlayerRoute}/:${RouteParameters.TOKEN_ID}/pause`, handlers.pause)
+  router.get(`${basePlayerRoute}/:${RouteParameters.TOKEN_ID}/queue`, handlers.getQueue)
 
   // Track Route
   router.get(`${baseTrackRoute}/:${RouteParameters.SEARCH_QUERY}/:${RouteParameters.TOKEN_ID}`, handlers.searchTracks)

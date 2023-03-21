@@ -2,6 +2,7 @@ version: '3.7'
 
 services: 
   db:
+    platform: linux/arm64/v8
     image: postgres:11-alpine@sha256:e149c53d27b41114d5cf2f7ef5e473da98772a85a9482febb4e8e85538b834ba
     environment:
       POSTGRES_DB: ${RDS_DBNAME}

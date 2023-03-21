@@ -17,12 +17,14 @@ type AuthenticationHandler = {
 
 type UserHandler = {
   create: KoaHandler
-  getByTokenId: KoaHandler
+  getById: KoaHandler
+  getBySpotifyId: KoaHandler
 }
 
 type PlayerHandler = {
   play: KoaHandler
   pause: KoaHandler
+  getQueue: KoaHandler
 }
 
 type TrackerHandler = {

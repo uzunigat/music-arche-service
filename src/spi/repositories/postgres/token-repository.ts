@@ -6,6 +6,7 @@ import { TokenRepository as SPITokenRepository } from '../../../domain/spi-ports
 import { KnexDatabaseConnection } from './knex-database-connection'
 import { EphemeralToken } from '../../../domain/spi-ports/token-dtos'
 import { mapToTokenDB, mapToTokenDomain } from '../util'
+import { addOneHourToCurrentDate } from '../../../utils/expired-date-token'
 
 class TokenRepository implements SPITokenRepository {
   private tokentable = 'tokens'
@@ -20,6 +21,7 @@ class TokenRepository implements SPITokenRepository {
     const trx = outsideTrx || (await this.createTransaction())
 
     const ephemeraltokenDB = mapToTokenDB(ephemeraltoken)
+    ephemeraltokenDB.expires_at = addOneHourToCurrentDate()
     const [createdToken] = await trx.table(this.tokentable).insert(ephemeraltokenDB).returning<Token[]>('*')
 
     if (!outsideTrx) await trx.commit()
@@ -31,6 +33,13 @@ class TokenRepository implements SPITokenRepository {
     const [token] = await this.db.client.table(this.tokentable).where({ id: tokenId }).returning<dbModels.Token[]>('*')
     const mapedToken = mapToTokenDomain(token)
     return mapedToken
+  }
+
+  async updateToken(tokenId: string, ephemeraltoken: EphemeralToken): Promise<Token> {
+    const ephemeraltokenDB = mapToTokenDB(ephemeraltoken)
+
+    const [updatedToken] = await this.db.client.table(this.tokentable).where({ id: tokenId }).update(ephemeraltokenDB).returning<Token[]>('*')
+    return updatedToken
   }
 }
 

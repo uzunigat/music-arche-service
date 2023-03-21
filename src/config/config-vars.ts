@@ -89,6 +89,11 @@ export default convict<Config>({
         type: String,
         env: 'SPOTIFY_PLAYER_PAUSE'
       },
+      queue: {
+        default: 'https://api.spotify.com/v1/me/player/queue',
+        type: String,
+        env: 'SPOTIFY_PLAYER_GET_QUEUE'
+      },
       search: {
         default: 'https://api.spotify.com/v1/search',
         type: String,

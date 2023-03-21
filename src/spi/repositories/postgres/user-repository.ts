@@ -5,7 +5,6 @@ import { EphemeralUser } from '../../../domain/spi-ports/user-dtos'
 import { mapToUserDB, mapToUserDomain } from '../util/map-user'
 import { User } from '../../../domain/model'
 import { PersistedUser } from '../../../domain/model'
-import * as dbModels from '../postgres/models'
 
 class UserRepository implements SPIUserRepository {
   private userTable = 'users'
@@ -20,7 +19,6 @@ class UserRepository implements SPIUserRepository {
     const trx = outsideTrx || (await this.createTransaction())
 
     const ephemeralUserDB = mapToUserDB(ephemeralUser)
-    console.log('Ephemeral User:', ephemeralUserDB)
     const [createdUser] = await trx.table(this.userTable).insert(ephemeralUserDB).returning<User[]>('*')
 
     if (!outsideTrx) await trx.commit()
@@ -28,15 +26,27 @@ class UserRepository implements SPIUserRepository {
     return createdUser
   }
 
-  async getUserByTokenId(tokenId: string, outsideTrx?: Knex.Transaction): Promise<PersistedUser> {
+  async getByTokenId(tokenId: string, outsideTrx?: Knex.Transaction): Promise<PersistedUser> {
     const trx = outsideTrx || (await this.createTransaction())
-
     const [user] = await trx.table(this.userTable).select('*').where('token_id', tokenId)
-    const mapeduser = mapToUserDomain(user)
+    const mapedUser = mapToUserDomain(user)
 
     if (!outsideTrx) await trx.commit()
 
-    return mapeduser
+    return mapedUser
+  }
+
+  async getBySpotifyId(spotifyId: string): Promise<User | null> {
+    const [user] = await this.db.client.table(this.userTable).select('*').where('spotify_id', spotifyId)
+    const mapedUser = user ? mapToUserDomain(user) : null
+
+    return mapedUser
+  }
+
+  async getById(id: string): Promise<User> {
+    const [user] = await this.db.client.table(this.userTable).select('*').where('id', id)
+
+    return user
   }
 }
 

@@ -28,8 +28,10 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(tokenTable, (table) => {
     table.uuid('id').notNullable().primary().defaultTo(knex.raw('uuid_generate_v4()'))
     table.string('access_token', 512).notNullable()
+    table.string('refresh_token', 512).notNullable()
     table.string('token_type').notNullable()
-    table.string('expires_in', 512).notNullable()
+    table.string('expires_in').notNullable()
+    table.timestamp('expires_at').notNullable()
     table.string('scope', 512).notNullable()
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now())
   })
